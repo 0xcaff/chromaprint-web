@@ -1150,6 +1150,9 @@ chownr@^1.1.1:
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
   integrity sha512-j38EvO5+LHX84jlo6h4UzmOwi0UgW61WRyPtJz4qaadK5eY3BTS5TY/S1Stc3Uk2lIM6TPevAlULiEJwie860g==
 
+"chromaprint-wasm@file:.yalc/chromaprint-wasm":
+  version "0.1.0-dc01459a"
+
 cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/cipher-base/-/cipher-base-1.0.4.tgz#8760e4ecc272f4c363532f926d874aae2c1397de"
@@ -1294,7 +1297,7 @@ colors@~1.1.2:
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
   integrity sha1-FopHAXVran9RoSzgyXv6KMCE7WM=
 
-command-exists@^1.2.6:
+command-exists@^1.2.6, command-exists@^1.2.7:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/command-exists/-/command-exists-1.2.8.tgz#715acefdd1223b9c9b37110a149c6392c2852291"
   integrity sha512-PM54PkseWbiiD/mMsbvW351/u+dafwTJ0ye2qB60G1aGQP9j3xK2gmMDc+R34L3nDtx4qMCitXT75mkbkGJDLw==
@@ -3319,6 +3322,13 @@ parcel-bundler@^1.10.3:
     tomlify-j0.4 "^3.0.0"
     v8-compile-cache "^2.0.0"
     ws "^5.1.1"
+
+parcel-plugin-wasm.rs@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-wasm.rs/-/parcel-plugin-wasm.rs-1.2.7.tgz#4bde9a7ca0ec045b562796290c1313844a091852"
+  integrity sha512-Cbj7OqmQxdwVeIP74y5RjtFKALwiDcRbiSwxmRizSJ8mcsVp1Th8GA/qRnWwNhz45t4eCcOqUsrwvp8gb4uecQ==
+  dependencies:
+    command-exists "^1.2.7"
 
 parse-asn1@^5.0.0:
   version "5.1.1"
