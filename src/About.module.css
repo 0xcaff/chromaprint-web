@@ -1,0 +1,22 @@
+.container {
+  padding-top: 10em;
+  padding-bottom: 5em;
+
+  margin: 0 auto;
+  max-width: 30em;
+  width: 100%;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.heading {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.body {
+  margin-top: 3em;
+  margin-bottom: 3em;
+  font-size: large;
+  line-height: 1.7em;
+}

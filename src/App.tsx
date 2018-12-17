@@ -1,13 +1,15 @@
 import React from "react";
-import { ChromaprintContext } from "chromaprint-wasm";
-import styles from "./style.module.css";
-
-const context = new ChromaprintContext();
-context.feed(new Int16Array([1, 2, 3]));
-console.log(context.finish());
+import styles from "./App.module.css";
+import { About } from "./About";
 
 export class App extends React.Component {
   render() {
-    return <div className={styles.container}>Hello World!!</div>;
+    return (
+      <About>
+        <div className={styles.inputSelection}>
+          <input type="file" />
+        </div>
+      </About>
+    );
   }
 }
