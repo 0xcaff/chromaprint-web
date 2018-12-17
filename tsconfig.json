@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react",
     "lib": [
       "dom",
       "dom.iterable",
@@ -27,6 +27,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "outDir": "dist",
   },
   "include": [
     "src"
