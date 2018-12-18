@@ -5,6 +5,15 @@
   overflow-y: scroll;
 }
 
-.inputSelection {
+.centered {
   text-align: center;
+}
+
+.inputSelection {
+  composes: centered;
+  margin-bottom: 3em;
+}
+
+.loading {
+  composes: centered;
 }

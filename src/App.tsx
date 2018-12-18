@@ -3,6 +3,7 @@ import styles from "./App.module.css";
 import { About } from "./About";
 import { getFingerprint } from "./audio";
 import { lookupByFingerprint, Result } from "./acoustid";
+import { Results } from "./Results";
 
 interface State {
   loading: LoadingState | null;
@@ -52,13 +53,19 @@ export class App extends React.Component<{}, State> {
   renderForState(state: LoadingState) {
     switch (state.type) {
       case "PROCESSING_AUDIO":
-        return <>Processing Audio...</>;
+        return <div className={styles.loading}>Processing Audio...</div>;
 
       case "LOADING_METADATA":
-        return <>Loading Metadtaa...</>;
+        return <div className={styles.loading}>Loading Metadtaa...</div>;
 
       case "LOADED":
-        return <FilePicker onFilePicked={this.handleFiles} />;
+        return (
+          <>
+            <FilePicker onFilePicked={this.handleFiles} />
+
+            <Results results={state.results} />
+          </>
+        );
     }
   }
 }

@@ -1,0 +1,22 @@
+.header {
+  font-weight: bold;
+  font-size: large;
+  line-height: 2em;
+  margin-bottom: 1em;
+  border-bottom: 1px solid black;
+}
+
+.resultContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.score {
+  flex: 1;
+  margin-left: 1em;
+  text-align: right;
+}
+
+.container {
+  margin-top: 3em;
+}
