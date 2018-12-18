@@ -16,7 +16,13 @@
 
 .body {
   margin-top: 3em;
-  margin-bottom: 3em;
   font-size: large;
   line-height: 1.7em;
+}
+
+.fork {
+  text-align: center;
+  font-size: small;
+  margin-top: 2em;
+  margin-bottom: 3em;
 }

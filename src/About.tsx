@@ -17,6 +17,10 @@ export const About = (props: Props) => (
       <a href="https://acoustid.org">AcoustID</a> to identify the song.
     </div>
 
+    <div className={styles.fork}>
+      <a href="https://github.com/0xcaff/chromaprint-web">Fork me on GitHub!</a>
+    </div>
+
     {props.children}
   </div>
 );
