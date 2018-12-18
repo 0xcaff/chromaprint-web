@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./App.module.css";
 import { About } from "./About";
+import { getFingerprint } from "./audio";
 
 interface State {
   loading: LoadingState | null;
@@ -16,7 +17,7 @@ export class App extends React.Component<{}, State> {
     loading: null
   };
 
-  handleFiles = (files: FileList | null) => {
+  handleFiles = async (files: FileList | null) => {
     if (!files || !files.length) {
       return;
     }
@@ -27,6 +28,9 @@ export class App extends React.Component<{}, State> {
     }
 
     this.setState({ loading: LoadingState.ProcessingAudio });
+    const fingerprint = await getFingerprint(firstFile);
+    console.log(fingerprint);
+    this.setState({ loading: null });
   };
 
   render() {
@@ -55,6 +59,6 @@ const loadingAsString = (state: LoadingState) => {
       return "Processing Audio...";
 
     case LoadingState.LoadingAcoustID:
-      return "Contacting AcoustID";
+      return "Contacting AcoustID...";
   }
 };
