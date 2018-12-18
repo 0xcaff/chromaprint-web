@@ -14,7 +14,7 @@ export const About = (props: Props) => (
       <a href="https://github.com/0xcaff/rust-chromaprint">rust-chromaprint</a>{" "}
       library running on the web using WebAssembly. The library extracts a
       fingerprint from the provided audio file. The fingerprint is then sent to{" "}
-      <a href="http://asana.com">AcoustID</a> to identify the song.
+      <a href="https://acoustid.org">AcoustID</a> to identify the song.
     </div>
 
     {props.children}
