@@ -17,7 +17,12 @@ const toPCM16 = (data: Float32Array): Int16Array => {
   return pcm16;
 };
 
-export const getFingerprint = async (file: File): Promise<string> => {
+export interface Fingerprint {
+  fingerprint: string;
+  duration: number;
+}
+
+export const getFingerprint = async (file: File): Promise<Fingerprint> => {
   const sampleRate = 44100;
   const time = 120;
 
@@ -25,9 +30,11 @@ export const getFingerprint = async (file: File): Promise<string> => {
   const rawBuffer = await readToEnd(file);
   const audioBuffer = await context.decodeAudioData(rawBuffer);
   const data = audioBuffer.getChannelData(0);
+  const duration = Math.round(data.length / sampleRate);
   const pcm16 = toPCM16(data.slice(0, sampleRate * time));
 
   const chromaprintContext = new ChromaprintContext();
   chromaprintContext.feed(pcm16);
-  return chromaprintContext.finish();
+  const fingerprint = chromaprintContext.finish();
+  return { fingerprint, duration };
 };

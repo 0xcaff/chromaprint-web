@@ -2,15 +2,16 @@ import React from "react";
 import styles from "./App.module.css";
 import { About } from "./About";
 import { getFingerprint } from "./audio";
+import { lookupByFingerprint, Result } from "./acoustid";
 
 interface State {
   loading: LoadingState | null;
 }
 
-enum LoadingState {
-  ProcessingAudio,
-  LoadingAcoustID
-}
+type LoadingState =
+  | { type: "PROCESSING_AUDIO" }
+  | { type: "LOADING_METADATA"; fingerprint: string }
+  | { type: "LOADED"; results: Result[] };
 
 export class App extends React.Component<{}, State> {
   state = {
@@ -27,10 +28,11 @@ export class App extends React.Component<{}, State> {
       return;
     }
 
-    this.setState({ loading: LoadingState.ProcessingAudio });
-    const fingerprint = await getFingerprint(firstFile);
-    console.log(fingerprint);
-    this.setState({ loading: null });
+    this.setState({ loading: { type: "PROCESSING_AUDIO" } });
+    const { fingerprint, duration } = await getFingerprint(firstFile);
+    this.setState({ loading: { type: "LOADING_METADATA", fingerprint } });
+    const results = await lookupByFingerprint(fingerprint, duration);
+    this.setState({ loading: { type: "LOADED", results } });
   };
 
   render() {
@@ -38,27 +40,38 @@ export class App extends React.Component<{}, State> {
 
     return (
       <About>
-        <div className={styles.inputSelection}>
-          {loading === null ? (
-            <input
-              type="file"
-              onInput={e => this.handleFiles(e.currentTarget.files)}
-            />
-          ) : (
-            loadingAsString(loading)
-          )}
-        </div>
+        {loading === null ? (
+          <FilePicker onFilePicked={this.handleFiles} />
+        ) : (
+          this.renderForState(loading)
+        )}
       </About>
     );
   }
+
+  renderForState(state: LoadingState) {
+    switch (state.type) {
+      case "PROCESSING_AUDIO":
+        return <>Processing Audio...</>;
+
+      case "LOADING_METADATA":
+        return <>Loading Metadtaa...</>;
+
+      case "LOADED":
+        return <FilePicker onFilePicked={this.handleFiles} />;
+    }
+  }
 }
 
-const loadingAsString = (state: LoadingState) => {
-  switch (state) {
-    case LoadingState.ProcessingAudio:
-      return "Processing Audio...";
+interface FilePickerProps {
+  onFilePicked: (file: FileList | null) => void;
+}
 
-    case LoadingState.LoadingAcoustID:
-      return "Contacting AcoustID...";
-  }
-};
+const FilePicker = (props: FilePickerProps) => (
+  <div className={styles.inputSelection}>
+    <input
+      type="file"
+      onInput={e => props.onFilePicked(e.currentTarget.files)}
+    />
+  </div>
+);
